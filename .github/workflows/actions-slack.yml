@@ -9,7 +9,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # Required
-      NOTIFY_MESSAGE: '${{ github.repository }} - ${{ github.workflow }}: branch `${{ github.ref }}` commit by @${{ github.actor }}'
+      NOTIFY_MESSAGE: '${{ github.repository }}(${{ github.workflow }}): branch `${{ github.ref }}`@${{ github.actor }}'
 
     steps:
     - uses: actions/checkout@v2
