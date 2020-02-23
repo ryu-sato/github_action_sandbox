@@ -2,6 +2,6 @@
 
 Sandbox of GitHub Actions.
 
-# GitHub Action
+# Sandbox results
 
-- [actions/actions-slack](https://github.com/marketplace/actions/actions-slack)
+see #1
