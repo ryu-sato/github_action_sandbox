@@ -22,9 +22,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        success_text: '*Success* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
 
     - name: Fail
       run: echo 'fail' && exit 1
@@ -34,9 +34,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        success_text: '*Success* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
 
     - name: Wait a moment
       if: always()
@@ -47,6 +47,6 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
-        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        success_text: '*Success* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
