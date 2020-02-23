@@ -9,6 +9,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # Required
+      NOTIFY_MESSAGE: '${{ github.repository }} - ${{ github.workflow }}: branch `${{ github.ref }}` commit by @${{ github.actor }}'
 
     steps:
     - uses: actions/checkout@v2
@@ -21,9 +22,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
-        failure_text: 'Step Failed 😱' # Optional
-        cancelled_text: 'Step Cancelled ⚠️' # Optional
+        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
 
     - name: Fail
       run: echo 'fail' && exit 1
@@ -33,9 +34,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
-        failure_text: 'Step Failed 😱' # Optional
-        cancelled_text: 'Step Cancelled ⚠️' # Optional
+        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
 
     - name: Wait a moment
       if: always()
@@ -46,6 +47,6 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
-        failure_text: 'Step Failed 😱' # Optional
-        cancelled_text: 'Step Cancelled ⚠️' # Optional
+        success_text: '**Success** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        failure_text: '**Fail** ${{ env.NOTIFY_MESSAGE }}' # Optional
+        cancelled_text: '**Cancelled** ${{ env.NOTIFY_MESSAGE }}' # Optional
