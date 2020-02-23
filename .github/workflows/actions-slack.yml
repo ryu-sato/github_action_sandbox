@@ -21,7 +21,7 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: 'Step Succeeded 🚀' # Optional
+        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
         failure_text: 'Step Failed 😱' # Optional
         cancelled_text: 'Step Cancelled ⚠️' # Optional
 
@@ -33,18 +33,19 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: 'Step Succeeded 🚀' # Optional
+        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
         failure_text: 'Step Failed 😱' # Optional
         cancelled_text: 'Step Cancelled ⚠️' # Optional
 
     - name: Wait a moment
+      if: always()
       run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; sleep 1; done; echo ''
-  
+
     - name: Notify result
       if: always()
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }} # Required
-        success_text: 'Step Succeeded 🚀' # Optional
+        success_text: ${{ github.repository }} ${{ github.ref }} ${{ github.actor }} ${{ github.workflow }} # Optional
         failure_text: 'Step Failed 😱' # Optional
         cancelled_text: 'Step Cancelled ⚠️' # Optional
