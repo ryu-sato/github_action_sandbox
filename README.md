@@ -4,4 +4,4 @@ Sandbox of GitHub Actions.
 
 # Sandbox results
 
-see #1
+see [Sandbox results](https://github.com/ryu-sato/github_action_sandbox/issues/1)
