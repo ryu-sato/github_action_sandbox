@@ -1,0 +1,50 @@
+name: Actions Slack
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # Required
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Success
+      run: echo 'success' || exit 0
+
+    - name: Notify success
+      if: always()
+      uses: innocarpe/actions-slack@v1
+      with:
+        status: ${{ job.status }} # Required
+        success_text: 'Step Succeeded 🚀' # Optional
+        failure_text: 'Step Failed 😱' # Optional
+        cancelled_text: 'Step Cancelled ⚠️' # Optional
+
+    - name: Fail
+      run: echo 'fail' || exit 1
+
+    - name: Notify failure
+      if: always()
+      uses: innocarpe/actions-slack@v1
+      with:
+        status: ${{ job.status }} # Required
+        success_text: 'Step Succeeded 🚀' # Optional
+        failure_text: 'Step Failed 😱' # Optional
+        cancelled_text: 'Step Cancelled ⚠️' # Optional
+
+    - name: Wait a moment
+      run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; done; echo ''
+  
+    - name: Notify result
+      if: always()
+      uses: innocarpe/actions-slack@v1
+      with:
+        status: ${{ job.status }} # Required
+        success_text: 'Step Succeeded 🚀' # Optional
+        failure_text: 'Step Failed 😱' # Optional
+        cancelled_text: 'Step Cancelled ⚠️' # Optional
