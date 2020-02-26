@@ -29,6 +29,7 @@ jobs:
     - name: Fail
       run: |
         echo "::log-command parameter1={data},parameter2={data}::{command value}"
+        echo "::error file=app.js,line=10,col=15::Something went wrong"
         echo 'fail' && exit 1
 
     - name: Notify failure
@@ -40,15 +41,15 @@ jobs:
         failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
         cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
 
-    - name: Wait a moment
-      if: always()
-      run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; sleep 1; done; echo ''
+    # - name: Wait a moment
+    #   if: always()
+    #   run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; sleep 1; done; echo ''
 
-    - name: Notify result
-      if: always()
-      uses: innocarpe/actions-slack@v1
-      with:
-        status: ${{ job.status }} # Required
-        success_text: '*Success* ${{ env.NOTIFY_MESSAGE }}' # Optional
-        failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
-        cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
+    # - name: Notify result
+    #   if: always()
+    #   uses: innocarpe/actions-slack@v1
+    #   with:
+    #     status: ${{ job.status }} # Required
+    #     success_text: '*Success* ${{ env.NOTIFY_MESSAGE }}' # Optional
+    #     failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
+    #     cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
