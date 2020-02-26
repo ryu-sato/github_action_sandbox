@@ -27,7 +27,9 @@ jobs:
         cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
 
     - name: Fail
-      run: echo 'fail' && exit 1
+      run: |
+        echo "::log-command parameter1={data},parameter2={data}::{command value}"
+        echo 'fail' && exit 1
 
     - name: Notify failure
       if: always()
