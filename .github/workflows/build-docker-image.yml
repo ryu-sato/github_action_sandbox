@@ -2,10 +2,10 @@ name: Build docker image
 
 on: [push]
 
-jobs:
-  env:
-    DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
+env:
+  DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
 
+jobs:
   build:
     runs-on: ubuntu-latest
 
