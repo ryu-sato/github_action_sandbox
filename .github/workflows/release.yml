@@ -1,6 +1,8 @@
 name: Release
 
-on: [published]
+on:
+  release:
+    types: [published]
 
 env:
   DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
