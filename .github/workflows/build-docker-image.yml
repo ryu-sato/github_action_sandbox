@@ -1,6 +1,9 @@
 name: Build docker image
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 
 env:
   DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
