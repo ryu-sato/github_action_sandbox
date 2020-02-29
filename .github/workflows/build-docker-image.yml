@@ -19,7 +19,7 @@ jobs:
         run: |
           docker build \
             --tag ${DOCKERHUB_REPOSITORY} \
-            ./docker
+            ./.docker
             
       - name: Push Docker Image
         run: |
