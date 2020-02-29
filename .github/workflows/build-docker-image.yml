@@ -6,7 +6,7 @@ env:
   DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
 
 jobs:
-  build:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +26,9 @@ jobs:
         run: |
           docker push ${DOCKERHUB_REPOSITORY}
 
-  publish-description:
+  publish_description:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build_and_push
     
     steps:
       - uses: actions/checkout@v2
