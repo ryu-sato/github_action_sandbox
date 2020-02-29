@@ -5,7 +5,7 @@ on: [release]
 env:
   DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
 
-job:
+jobs:
   release:
     steps:
       - name: Get SemVer
