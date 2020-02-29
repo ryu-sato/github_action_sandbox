@@ -1,0 +1,33 @@
+name: Release
+
+on: [release]
+
+env:
+  DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
+
+job:
+  release:
+    steps:
+      - name: Get SemVer
+        run: |
+          SEMVER=`git tag | sed -E 's/^v//'`
+          echo ::set-env name=SEMVER::$SEMVER
+
+      - name: Build Docker Image
+        run: >
+          docker build
+          --tag ${DOCKERHUB_REPOSITORY}
+          ./.docker
+
+      - name: Login to docker.io registry
+        run: >
+          echo ${{ secrets.DOCKER_REGISTRY_PASSWORD }} |
+          docker login --username ${{ secrets.DOCKER_REGISTRY_USERNAME }} --password-stdin
+      
+      - name: Tagging Docker Image by SemVer and publish
+        uses: weseek/ghaction-docker-tags-by-semver@v1.0.5
+        with:
+          source: ${{ env.DOCKERHUB_REPOSITORY }}
+          target: ${{ env.DOCKERHUB_REPOSITORY }}
+          semver: ${{ env.SEMVER }}
+          publish: true
