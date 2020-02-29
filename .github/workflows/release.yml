@@ -9,6 +9,8 @@ env:
 
 jobs:
   release:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Get SemVer
         run: |
