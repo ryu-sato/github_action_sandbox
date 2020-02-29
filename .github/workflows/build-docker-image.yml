@@ -3,10 +3,11 @@ name: Build docker image
 on: [push]
 
 jobs:
+  env:
+    DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
+
   build:
     runs-on: ubuntu-latest
-    env:
-      DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
 
     steps:
       - uses: actions/checkout@v2
