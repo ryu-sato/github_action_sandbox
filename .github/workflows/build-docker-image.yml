@@ -27,7 +27,7 @@ jobs:
           --platform linux/amd64
           --cache-from type=registry,ref=${DOCKERHUB_REPOSITORY}
           --cache-to type=registry,ref=${DOCKERHUB_REPOSITORY},mode=max
-          --file ./.docker/Dockerfile .
+          ./.docker
 
       - name: Login to Docker Hub
         run: >
