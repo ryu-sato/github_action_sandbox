@@ -15,11 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v1.0.4
+        with:
+          version: v0.3.1
+
       - name: Build Docker Image
         run: >
-          docker build
+          docker buildx build
           --tag ${DOCKERHUB_REPOSITORY}
-          ./.docker
+          --platform linux/amd64
+          --cache-from type=registry,ref=${DOCKERHUB_REPOSITORY}
+          --cache-to type=registry,ref=${DOCKERHUB_REPOSITORY},mode=max
+          --file ./.docker/Dockerfile .
 
       - name: Login to Docker Hub
         run: >
