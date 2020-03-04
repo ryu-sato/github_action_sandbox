@@ -28,7 +28,7 @@ jobs:
       - name: Build Docker Image
         run: >
           docker buildx build
-          --tag ${DOCKERHUB_REPOSITORY}
+          --tag ${DOCKERHUB_REPOSITORY}:hoge
           --platform linux/amd64
           --cache-from type=registry,ref=${DOCKERHUB_REPOSITORY}
           --cache-to type=registry,ref=${DOCKERHUB_REPOSITORY},mode=max
