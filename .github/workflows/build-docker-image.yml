@@ -25,19 +25,15 @@ jobs:
           echo ${{ secrets.DOCKER_REGISTRY_PASSWORD }} |
           docker login --username ${{ secrets.DOCKER_REGISTRY_USERNAME }} --password-stdin
   
-      - name: Build Docker Image
+      - name: Build and push latest Docker Image
         run: >
           docker buildx build
-          --tag ${DOCKERHUB_REPOSITORY}:hoge
+          --tag ${DOCKERHUB_REPOSITORY}
           --platform linux/amd64
           --cache-from type=registry,ref=${DOCKERHUB_REPOSITORY}
           --cache-to type=registry,ref=${DOCKERHUB_REPOSITORY},mode=max
           --push
           ./.docker
-
-      # - name: Push Docker Image
-      #   run: >
-      #     docker push ${DOCKERHUB_REPOSITORY}
 
   publish_description:
     runs-on: ubuntu-latest
