@@ -19,10 +19,18 @@ jobs:
           SEMVER=`git tag | sed -E 's/^v//'`
           echo ::set-env name=SEMVER::$SEMVER
 
+      - name: Set up Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v1.0.4
+        with:
+          version: v0.3.1
+
       - name: Build Docker Image
         run: >
-          docker build
+          docker buildx build
           --tag ${DOCKERHUB_REPOSITORY}
+          --platform linux/amd64
+          --cache-from type=registry,ref=${DOCKERHUB_REPOSITORY}
+          --load
           ./.docker
 
       - name: Login to docker.io registry
