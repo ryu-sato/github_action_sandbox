@@ -50,7 +50,7 @@ jobs:
       if: always()
       with:
         type: ${{ job.status }}
-        job_name: '*${{ github.job }} is failed. See detail: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}*'
+        job_name: '*build*'
         channel: '#ci_test'
         isCompactMode: true
         url: ${{ secrets.SLACK_WEBHOOK_URL }}
