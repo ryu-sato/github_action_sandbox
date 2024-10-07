@@ -47,7 +47,7 @@ jobs:
 
     - name: Slack Notification
       uses: weseek/ghaction-slack-notification@master
-      if: always()
+      if: failure()
       with:
         type: ${{ job.status }}
         job_name: '*build*'
