@@ -52,7 +52,7 @@ jobs:
         type: ${{ job.status }}
         job_name: '*build*'
         channel: '#ci_test'
-        isCompactMode: true
+        isCompactMode: false
         url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     # - name: Wait a moment
