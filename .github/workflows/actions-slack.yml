@@ -45,6 +45,16 @@ jobs:
         failure_text: '*Fail* ${{ env.NOTIFY_MESSAGE }}' # Optional
         cancelled_text: '*Cancelled* ${{ env.NOTIFY_MESSAGE }}' # Optional
 
+    - name: Slack Notification
+      uses: weseek/ghaction-slack-notification@master
+      if: always()
+      with:
+        type: ${{ job.status }}
+        job_name: '*${{ github.job }} is failed. See detail: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}*'
+        channel: '#ci_test'
+        isCompactMode: true
+        url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
     # - name: Wait a moment
     #   if: always()
     #   run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; sleep 1; done; echo ''
