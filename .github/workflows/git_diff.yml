@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
       - name: Check for changes
         id: check_for_changes
-        eng:
+        env:
           COMMIT_FROM: origin/diff_from
           COMMIT_TO: origin/diff_to
           CHANGES_FILE: /tmp/changes_from_production_to_staging
