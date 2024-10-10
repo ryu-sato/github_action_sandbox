@@ -11,10 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check for changes
         id: check_for_changes
-        run: |
-          git fetch
-          git diff origin/diff_from...origin/diff_to --exit-code
-          echo "result=$?" >> $GITHUB_OUTPUT
+        run: echo "result=$(git diff origin/diff_from...origin/diff_to --exit-code)" >> $GITHUB_OUTPUT
 
   some_operations:
     name: Some operations
