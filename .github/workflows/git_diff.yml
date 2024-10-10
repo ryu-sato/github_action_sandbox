@@ -13,12 +13,15 @@ jobs:
           fetch-depth: 0
       - name: Check for changes
         id: check_for_changes
+        eng:
+          COMMIT_FROM: origin/diff_from
+          COMMIT_TO: origin/diff_to
+          CHANGES_FILE: /tmp/changes_from_production_to_staging
         run: |
           set -o pipefail
-          CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
 
           # 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
-          git diff origin/diff_to...origin/diff_from | tee $CHANGES_FILE
+          git diff ${COMMIT_FROM}...${COMMIT_TO} | tee $CHANGES_FILE
           if test -s $CHANGES_FILE; then
             echo "result=changes_exist" >> $GITHUB_OUTPUT
           else
