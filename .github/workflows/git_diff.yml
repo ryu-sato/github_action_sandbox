@@ -18,7 +18,7 @@ jobs:
           CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
 
           # 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
-          git diff origin/diff_from...origin/diff_to | tee $CHANGES_FILE
+          git diff origin/diff_to...origin/diff_from | tee $CHANGES_FILE
           echo "result=$(test -s $CHANGES_FILE)" >> $GITHUB_OUTPUT
 
   some_operations:
