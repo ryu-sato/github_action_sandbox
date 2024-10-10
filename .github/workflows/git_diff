@@ -1,0 +1,27 @@
+name: Show `git diff`
+on:
+  workflow_dispatch:
+jobs:
+  check_for_changes:
+    name: Check for changes
+    runs-on: ubuntu-latest
+    outputs:
+      is_needed: ${{ steps.check_for_changes.outputs.result == 1 }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for changes
+        id: check_for_changes
+        run: |
+          git fetch
+          git diff origin/diff_from...origin/diff_to --exit-code
+          echo "result=$?" >> $GITHUB_OUTPUT
+
+  some_operations:
+    name: Some operations
+    runs-on: ubuntu-latest
+    needs: check_for_changes
+    if: is_needed
+    steps:
+      - uses: actions/checkout@v4
+      - name: echo
+        run: echo backport
