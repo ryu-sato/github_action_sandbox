@@ -20,7 +20,11 @@ jobs:
         run: |
           set -o pipefail
 
-          # 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
+          # [MEMO]
+          #   * 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
+          #   * `git diff A...B` は A と B の merge-base から B までの差分を指す(`git diff $(git merge-base A B) B` と同等)
+          #     * see. https://git-scm.com/docs/git-diff#Documentation/git-diff.txt-emgitdiffemltoptionsgtltcommitgtltcommitgt--ltpathgt82308203-1
+          #     * 要するに、production を staging にマージすると、どういう差分が出るか？を指す
           git diff ${COMMIT_FROM}...${COMMIT_TO} | tee $CHANGES_FILE
           if test -s $CHANGES_FILE; then
             echo "result=changes_exist" >> $GITHUB_OUTPUT
