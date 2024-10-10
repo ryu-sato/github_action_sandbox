@@ -6,7 +6,7 @@ jobs:
     name: Check for changes
     runs-on: ubuntu-latest
     outputs:
-      is_needed: ${{ steps.check_for_changes.outputs.result == 1 }}
+      is_needed: ${{ steps.check_for_changes.outputs.result == '1' }}
     steps:
       - uses: actions/checkout@v4
         with:
