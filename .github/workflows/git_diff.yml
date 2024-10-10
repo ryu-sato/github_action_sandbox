@@ -9,9 +9,16 @@ jobs:
       is_needed: ${{ steps.check_for_changes.outputs.result == 1 }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enable pipefail
+        run: set -o pipefail
       - name: Check for changes
         id: check_for_changes
-        run: echo "result=$(git diff origin/diff_from...origin/diff_to --exit-code)" >> $GITHUB_OUTPUT
+        run: |
+          CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
+          git diff origin/diff_from...origin/diff_to | tee $CHANGES_FILE
+          echo "result=$(test -s $CHANGES_FILE)" >> $GITHUB_OUTPUT
 
   some_operations:
     name: Some operations
