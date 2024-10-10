@@ -6,6 +6,7 @@ jobs:
     name: Check for changes
     runs-on: ubuntu-latest
     outputs:
+      # [MEMO] OUTPUTS は文字列で扱われるので boolean は使っていない
       result_of_check_for_changes: ${{ steps.check_for_changes.outputs.result }}
     steps:
       - uses: actions/checkout@v4
