@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Enable pipefail
-        run: set -o pipefail
       - name: Check for changes
         id: check_for_changes
         run: |
+          set -o pipefail
           CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
+          
           git diff origin/diff_from...origin/diff_to_hoge | tee $CHANGES_FILE
           echo "result=$(test -s $CHANGES_FILE)" >> $GITHUB_OUTPUT
 
