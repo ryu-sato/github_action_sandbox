@@ -15,8 +15,8 @@ jobs:
       - name: Check for changes
         id: check_for_changes
         env:
-          BACKPORT_FROM: origin/diff_from
-          BACKPORT_TO: origin/diff_to
+          GIT_REF_FROM: origin/diff_from
+          GIT_REF_TO: origin/diff_to
           CHANGES_FILE: /tmp/changes_from_production_to_staging
         run: |
           set -o pipefail
@@ -26,7 +26,7 @@ jobs:
           #   * `git diff A...B` は A と B の merge-base から B までの差分を指す(`git diff $(git merge-base A B) B` と同等)
           #     * see. https://git-scm.com/docs/git-diff#Documentation/git-diff.txt-emgitdiffemltoptionsgtltcommitgtltcommitgt--ltpathgt82308203-1
           #     * 要するに、production を staging にマージすると、どういう差分が出るか？を指す
-          git diff ${BACKPORT_TO}...${BACKPORT_FROM} | tee $CHANGES_FILE
+          git diff ${GIT_REF_TO}...${GIT_REF_FROM} | tee $CHANGES_FILE
           if test -s $CHANGES_FILE; then
             echo "result=changes_exist" >> $GITHUB_OUTPUT
           else
