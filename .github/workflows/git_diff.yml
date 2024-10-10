@@ -17,7 +17,7 @@ jobs:
         id: check_for_changes
         run: |
           CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
-          git diff origin/diff_from...origin/diff_to | tee $CHANGES_FILE
+          git diff origin/diff_from...origin/diff_to_hoge | tee $CHANGES_FILE
           echo "result=$(test -s $CHANGES_FILE)" >> $GITHUB_OUTPUT
 
   some_operations:
