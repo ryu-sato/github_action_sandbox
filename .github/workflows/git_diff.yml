@@ -6,7 +6,7 @@ jobs:
     name: Check for changes
     runs-on: ubuntu-latest
     outputs:
-      is_needed: ${{ steps.check_for_changes.outputs.result == '1' }}
+      is_needed: ${{ steps.check_for_changes.outputs.result == 'changes_exist' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,7 +19,12 @@ jobs:
 
           # 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
           git diff origin/diff_to...origin/diff_from | tee $CHANGES_FILE
-          echo "result=$(test -s $CHANGES_FILE; echo $?)" >> $GITHUB_OUTPUT
+          if test -s $CHANGES_FILE; then
+            echo "result=changes_exist" >> $GITHUB_OUTPUT
+          else
+            echo "No need to backport"
+            echo "result=no_change" >> $GITHUB_OUTPUT
+          fi
 
   some_operations:
     name: Some operations
