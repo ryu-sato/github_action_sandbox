@@ -13,4 +13,4 @@ jobs:
 
     steps:
     - run: echo ${{ secrets.SECRET_A }}
-    - run: echo ${{ env.TEST_A }}
+    - run: echo ${{ vars.TEST_A }}
