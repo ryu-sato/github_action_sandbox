@@ -9,7 +9,7 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
-    environment: staging
+    environment: demo
 
     steps:
     - run: echo ${{ secrets.SECRET_A }}
