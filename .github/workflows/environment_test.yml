@@ -4,14 +4,12 @@ on: push
 
 permissions:
   contents: read
-env:
-  ENV_NAME: staging
 
 jobs:
   test:
 
     runs-on: ubuntu-latest
-    environment: ${{ env.ENV_NAME }}
+    environment: staging
 
     steps:
     - run: echo ${{ secrets.SECRET_A }}
