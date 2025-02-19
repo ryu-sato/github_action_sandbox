@@ -5,7 +5,7 @@ on: push
 permissions:
   contents: read
 env:
-  ENV_NAME: production
+  ENV_NAME: staging
 
 jobs:
   test:
