@@ -57,7 +57,7 @@ jobs:
 
     - name: Slack Notification
       if: always()
-      uses: ./.github/actions/notify-to-slack@master
+      uses: ./.github/actions/notify-to-slack
       with:
         slack_channel_id: '#ci_test'
         webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
