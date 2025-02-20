@@ -55,6 +55,13 @@ jobs:
         isCompactMode: false
         url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
+    - name: Slack Notification
+      uses: ../actions/notify-to-slack@master
+      with:
+        slack_channel_id: '#ci_test'
+        webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+        color: ${{ job.status }}
+
     # - name: Wait a moment
     #   if: always()
     #   run: echo -n 'wait a moment, you can cancel job.'; for ((I=0; I < 60; I++)); do echo -n '.'; sleep 1; done; echo ''
