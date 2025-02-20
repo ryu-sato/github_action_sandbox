@@ -56,7 +56,7 @@ jobs:
         url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Slack Notification
-      uses: ../actions/notify-to-slack@master
+      uses: ./.github/actions/notify-to-slack@master
       with:
         slack_channel_id: '#ci_test'
         webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
