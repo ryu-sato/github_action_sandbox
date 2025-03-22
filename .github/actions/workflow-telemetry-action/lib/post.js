@@ -76,6 +76,7 @@ function getCurrentJob() {
         });
         try {
             for (let i = 0; i < 10; i++) {
+                logger.info(`try: ${i}`);
                 const currentJob = yield _getCurrentJob();
                 if (currentJob && currentJob.id) {
                     return currentJob;

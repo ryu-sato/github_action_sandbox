@@ -47,6 +47,7 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
   }
   try {
     for (let i = 0; i < 10; i++) {
+      logger.info(`try: ${i}`);
       const currentJob: WorkflowJobType | null = await _getCurrentJob()
       if (currentJob && currentJob.id) {
         return currentJob
