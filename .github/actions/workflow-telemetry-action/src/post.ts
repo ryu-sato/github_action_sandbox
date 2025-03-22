@@ -24,7 +24,8 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
       })
       const jobs: WorkflowJobType[] = result.data.jobs
       logger.info(JSON.stringify(jobs));
-      logger.info(`jobs.length: jobs.length`);
+      logger.info(`jobs.length: ${jobs.length}`);
+      logger.info(`process.env.RUNNER_NAME: ${process.env.RUNNER_NAME}`);
       // If there are no jobs, stop here
       if (!jobs || !jobs.length) {
         break
