@@ -6,19 +6,27 @@ jobs:
     name: Check for changes
     runs-on: ubuntu-latest
     outputs:
-      is_needed: ${{ steps.check_for_changes.outputs.result == 'changes_exist' }}
+      # [MEMO] OUTPUTS は文字列で扱われるので boolean は使っていない
+      result_of_check_for_changes: ${{ steps.check_for_changes.outputs.result }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Check for changes
         id: check_for_changes
-        run: |
+        env:
+          GIT_REF_FROM: origin/diff_from
+          GIT_REF_TO: origin/diff_to
+          CHANGES_FILE: /tmp/changes_from_production_to_staging
+        run: &run_of_check_for_changes |
           set -o pipefail
-          CHANGES_FILE=/tmp/changes_from_diff_from_to_diff_to
 
-          # 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
-          git diff origin/diff_to...origin/diff_from | tee $CHANGES_FILE
+          # [MEMO]
+          #   * 差分があるときは step を続け、git コマンドが失敗したときは step を止めたいので `--exit-code` は使っていない
+          #   * `git diff A...B` は A と B の merge-base から B までの差分を指す(`git diff $(git merge-base A B) B` と同等)
+          #     * see. https://git-scm.com/docs/git-diff#Documentation/git-diff.txt-emgitdiffemltoptionsgtltcommitgtltcommitgt--ltpathgt82308203-1
+          #     * 要するに、production を staging にマージすると、どういう差分が出るか？を指す
+          git diff ${GIT_REF_TO}...${GIT_REF_FROM} | tee $CHANGES_FILE
           if test -s $CHANGES_FILE; then
             echo "result=changes_exist" >> $GITHUB_OUTPUT
           else
@@ -26,11 +34,29 @@ jobs:
             echo "result=no_change" >> $GITHUB_OUTPUT
           fi
 
+  check_for_changes_2:
+    name: Check for changes
+    runs-on: ubuntu-latest
+    outputs:
+      # [MEMO] OUTPUTS は文字列で扱われるので boolean は使っていない
+      result_of_check_for_changes: ${{ steps.check_for_changes.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for changes
+        id: check_for_changes
+        env:
+          GIT_REF_FROM: origin/diff_from_2
+          GIT_REF_TO: origin/diff_to_2
+          CHANGES_FILE: /tmp/changes_from_production_to_staging
+        run: *run_of_check_for_changes
+
   some_operations:
     name: Some operations
     runs-on: ubuntu-latest
     needs: check_for_changes
-    if: needs.check_for_changes.outputs.is_needed
+    if: needs.check_for_changes.outputs.result_of_check_for_changes == 'changes_exist'
     steps:
       - uses: actions/checkout@v4
       - name: echo

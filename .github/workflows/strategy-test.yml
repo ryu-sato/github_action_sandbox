@@ -1,0 +1,15 @@
+name: strategy test
+
+on: push
+
+jobs:
+  strategy_test:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        each_value:
+        - val1
+        - val2
+    steps:
+    - run: echo ${{ matrix.val1 }}
