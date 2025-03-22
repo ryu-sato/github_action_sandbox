@@ -1,6 +1,7 @@
 name: workflow telemetry action
 on: push
 permissions:
+  actions: read
   pull-requests: write
 jobs:
   workflow-telemetry-action:
