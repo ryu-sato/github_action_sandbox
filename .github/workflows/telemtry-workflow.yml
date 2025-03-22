@@ -1,8 +1,5 @@
 name: workflow telemetry action
-on:
-  push:
-    branches:
-    - invalid
+on: push
 permissions:
   actions: read
   pull-requests: write
@@ -10,5 +7,7 @@ jobs:
   workflow-telemetry-action:
     runs-on: ubuntu-latest
     steps:
+      # - name: Collect Workflow Telemetry
+      #   uses: catchpoint/workflow-telemetry-action@v2
       - name: Collect Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@v2
+        uses: ./.github/actions/workflow-telemetry-action
