@@ -11,8 +11,7 @@ jobs:
     - uses: actions/github-script@v7
       with:
         script: |
-          const gh = require('@actions/github');
-          const { workflow, job, repo, runId, sha } = gh.context;
+          const { workflow, job, repo, runId, sha } = context;
           const result = await github.rest.actions.listJobsForWorkflowRun({
             owner: repo.owner,
             repo: repo.repo,
