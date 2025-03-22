@@ -23,6 +23,7 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
         page
       })
       const jobs: WorkflowJobType[] = result.data.jobs
+      console.log(jobs);
       // If there are no jobs, stop here
       if (!jobs || !jobs.length) {
         break

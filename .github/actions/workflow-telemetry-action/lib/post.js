@@ -55,6 +55,7 @@ function getCurrentJob() {
                     page
                 });
                 const jobs = result.data.jobs;
+                console.log(jobs);
                 // If there are no jobs, stop here
                 if (!jobs || !jobs.length) {
                     break;
