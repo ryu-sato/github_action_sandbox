@@ -17,7 +17,7 @@ jobs:
             repo: repo.repo,
             run_id: runId,
             per_page: 5,
-            0,
+            page: 0,
           })
           console.log(result.data.jobs);
           return result.data.jobs;
