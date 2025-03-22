@@ -76677,7 +76677,7 @@ const processTracer = __importStar(__nccwpck_require__(6160));
 const logger = __importStar(__nccwpck_require__(4636));
 const { pull_request } = github.context.payload;
 const { workflow, job, repo, runId, sha } = github.context;
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 30;
 const octokit = new action_1.Octokit();
 function getCurrentJob() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -76691,7 +76691,7 @@ function getCurrentJob() {
                     page
                 });
                 const jobs = result.data.jobs;
-                logger.info(JSON.stringify(jobs));
+                logger.info(JSON.stringify(jobs.map(it => it.run_id)));
                 logger.info(`jobs.length: ${jobs.length}`);
                 logger.info(`process.env.RUNNER_NAME: ${process.env.RUNNER_NAME}`);
                 // If there are no jobs, stop here

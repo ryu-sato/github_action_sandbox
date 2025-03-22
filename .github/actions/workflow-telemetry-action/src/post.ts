@@ -9,7 +9,7 @@ import { WorkflowJobType } from './interfaces'
 
 const { pull_request } = github.context.payload
 const { workflow, job, repo, runId, sha } = github.context
-const PAGE_SIZE = 100
+const PAGE_SIZE = 30
 const octokit: Octokit = new Octokit()
 
 async function getCurrentJob(): Promise<WorkflowJobType | null> {
@@ -23,7 +23,7 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
         page
       })
       const jobs: WorkflowJobType[] = result.data.jobs
-      logger.info(JSON.stringify(jobs));
+      logger.info(JSON.stringify(jobs.map(it => it.run_id)));
       logger.info(`jobs.length: ${jobs.length}`);
       logger.info(`process.env.RUNNER_NAME: ${process.env.RUNNER_NAME}`);
       // If there are no jobs, stop here
