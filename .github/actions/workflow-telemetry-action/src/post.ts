@@ -33,7 +33,7 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
       const currentJobs = jobs.filter(
         it =>
           it.status === 'in_progress' &&
-          it.runner_name === process.env.RUNNER_NAME
+          (it.runner_name === process.env.RUNNER_NAME || it.runner_name == 'GitHub Actions')
       )
       if (currentJobs && currentJobs.length) {
         return currentJobs[0]
