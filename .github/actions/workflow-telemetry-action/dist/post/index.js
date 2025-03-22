@@ -76682,7 +76682,6 @@ const octokit = new action_1.Octokit();
 function getCurrentJob() {
     return __awaiter(this, void 0, void 0, function* () {
         const _getCurrentJob = () => __awaiter(this, void 0, void 0, function* () {
-            logger.info(JSON.stringify(github.context));
             for (let page = 0;; page++) {
                 const result = yield octokit.rest.actions.listJobsForWorkflowRun({
                     owner: repo.owner,
@@ -76693,6 +76692,7 @@ function getCurrentJob() {
                 });
                 const jobs = result.data.jobs;
                 logger.info(JSON.stringify(jobs));
+                logger.info(`jobs.length: jobs.length`);
                 // If there are no jobs, stop here
                 if (!jobs || !jobs.length) {
                     break;

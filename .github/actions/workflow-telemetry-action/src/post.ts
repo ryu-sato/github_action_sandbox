@@ -14,7 +14,6 @@ const octokit: Octokit = new Octokit()
 
 async function getCurrentJob(): Promise<WorkflowJobType | null> {
   const _getCurrentJob = async (): Promise<WorkflowJobType | null> => {
-    logger.info(JSON.stringify(github.context));
     for (let page = 0; ; page++) {
       const result = await octokit.rest.actions.listJobsForWorkflowRun({
         owner: repo.owner,
@@ -25,6 +24,7 @@ async function getCurrentJob(): Promise<WorkflowJobType | null> {
       })
       const jobs: WorkflowJobType[] = result.data.jobs
       logger.info(JSON.stringify(jobs));
+      logger.info(`jobs.length: jobs.length`);
       // If there are no jobs, stop here
       if (!jobs || !jobs.length) {
         break
