@@ -16,7 +16,7 @@ jobs:
             owner: repo.owner,
             repo: repo.repo,
             run_id: runId,
-            per_page: PAGE_SIZE,
+            per_page: 5,
             page
           })
           console.log(result.data.jobs);
