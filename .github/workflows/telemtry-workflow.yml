@@ -7,6 +7,7 @@ jobs:
   workflow-telemetry-action:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       # - name: Collect Workflow Telemetry
       #   uses: catchpoint/workflow-telemetry-action@v2
       - name: Collect Workflow Telemetry
