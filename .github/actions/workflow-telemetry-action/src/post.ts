@@ -117,6 +117,7 @@ async function reportAll(
 async function run(): Promise<void> {
   try {
     logger.info(`Finishing ...`)
+    logger.info(`Test ...`)
 
     const currentJob: WorkflowJobType | null = await getCurrentJob()
 

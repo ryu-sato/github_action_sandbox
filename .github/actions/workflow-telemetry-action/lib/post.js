@@ -129,6 +129,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             logger.info(`Finishing ...`);
+            logger.info(`Test ...`);
             const currentJob = yield getCurrentJob();
             if (!currentJob) {
                 logger.error(`Couldn't find current job. So action will not report any data.`);
