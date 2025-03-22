@@ -11,4 +11,4 @@ jobs:
       # - name: Collect Workflow Telemetry
       #   uses: catchpoint/workflow-telemetry-action@v2
       - name: Collect Workflow Telemetry
-        uses: ./.github/actions/workflow-telemetry-action
+        uses: ryu-sato/workflow-telemetry-action@refs/heads/fix/enable-to-filter-github-action-runner
