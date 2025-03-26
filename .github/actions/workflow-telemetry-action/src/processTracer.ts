@@ -79,9 +79,9 @@ export async function start(): Promise<boolean> {
         'sudo',
         [
           path.join(__dirname, `../proc-tracer/${procTracerBinaryName}`),
-          '-f',
+          '--format',
           'json',
-          '-o',
+          '--output',
           procTraceOutFilePath
         ],
         {
