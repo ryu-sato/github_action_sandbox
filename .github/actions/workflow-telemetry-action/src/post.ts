@@ -141,7 +141,7 @@ async function run(): Promise<void> {
       await statCollector.report(currentJob)
     // Report process tracer
     const procTracerContent: string | null =
-      await processTracer.report(currentJob)
+      await processTracer.report(currentJob.name, {})
 
     let allContent = ''
 
