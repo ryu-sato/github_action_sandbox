@@ -11,4 +11,9 @@ jobs:
         with:
           ruby-version: 3
       - run: |
-          ruby -e 'puts "hello"'
+          ruby -e '
+          require "yaml"
+          target_dependency_name = ARGV.first
+          config = open(".github/auto-merge-list.yaml", 'r') { |f| YAML.load(f) }
+          puts config
+          '
