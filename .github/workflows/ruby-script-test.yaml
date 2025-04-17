@@ -1,4 +1,4 @@
-name: test
+name: ruby script test
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
+          ruby-version: 3
       - run: |
           ruby -e '
             require "yaml"
