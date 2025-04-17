@@ -1,0 +1,19 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: |
+          ruby -e '
+            require "yaml"
+            target_dependency_name = ARGV.first
+            config = open(".github/auto-merge-list.yaml", 'r') { |f| YAML.load(f) }
+            puts config
+          '
