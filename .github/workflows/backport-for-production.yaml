@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - production
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   backport_to_master:
