@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-        gh pr create --base master --title "[backport] backport to master"
+        gh pr create --base master --title "[backport] backport to master" --body "backport"
 
         # 後続のステップで利用するため作成した PR の number を取得し環境変数に入れる
         # branch を元に URL を取得しそれを正規表現で number のみ抽出している
