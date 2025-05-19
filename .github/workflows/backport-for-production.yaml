@@ -3,14 +3,20 @@ on:
   push:
     branches:
       - production
-env:
-  GH_TOKEN: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}
 
 jobs:
   backport_to_master:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Generate github token
+      id: generate_token
+      uses: tibdex/github-app-token@v2
+      with:
+        app_id: ${{ secrets.DEPENDABOT_AUTO_MERGE_APP_ID }}
+        private_key: ${{ secrets.DEPENDABOT_AUTO_MERGE_PRIVATE_KEY }}
+    - run: |
+        echo "GITHUB_TOKEN=${{ steps.generate_token.outputs.token }}" >> $GITHUB_ENV
     - run: |
         gh pr create --base master --title "[backport] backport to master" --body "backport"
 
