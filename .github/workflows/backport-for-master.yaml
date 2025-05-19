@@ -6,6 +6,6 @@ on:
 
 jobs:
   backport_to_master:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
     - run: echo nothing to do
