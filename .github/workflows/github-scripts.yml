@@ -1,0 +1,24 @@
+name: github script
+on: push
+permissions:
+  actions: read
+  pull-requests: write
+jobs:
+  github-script:
+    name: github script
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v7
+      with:
+        script: |
+          const { workflow, job, repo, runId, sha } = context;
+          const result = await github.rest.actions.listJobsForWorkflowRun({
+            owner: repo.owner,
+            repo: repo.repo,
+            run_id: runId,
+            per_page: 5,
+            page: 0,
+          })
+          console.log(result.data.jobs);
+          return result.data.jobs;
+        result-encoding: string

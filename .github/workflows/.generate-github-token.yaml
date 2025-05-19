@@ -1,0 +1,13 @@
+name: Generate github token
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  dependabot:
+    uses: ryu-sato/github_action_sandbox/.github/workflows/generate-github-token.yaml@master
+    secrets:
+      app_id: ${{ secrets.APP_ID }}
+      private_key: ${{ secrets.PRIVATE_KEY }}

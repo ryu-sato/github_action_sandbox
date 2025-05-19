@@ -1,0 +1,16 @@
+name: workflow telemetry action
+on: push
+permissions:
+  actions: read
+  pull-requests: write
+jobs:
+  workflow-telemetry-action:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      # - name: Collect Workflow Telemetry
+      #   uses: catchpoint/workflow-telemetry-action@v2
+      # - name: Collect Workflow Telemetry
+      #   uses: ryu-sato/workflow-telemetry-action@refs/heads/fix/enable-to-filter-github-action-runner
+      - name: Collect Workflow Telemetry
+        uses: ./.github/actions/workflow-telemetry-action

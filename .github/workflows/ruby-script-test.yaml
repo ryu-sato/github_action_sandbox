@@ -1,0 +1,23 @@
+name: ruby script test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3
+      - run: |
+          ruby <<EOF
+
+          require "yaml"
+
+          config = open(".github/auto-merge-list.yaml", 'r') { |f| YAML.load(f) }
+          puts config
+
+          EOF

@@ -1,0 +1,11 @@
+name: Backport pushed commit for master
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backport_to_master:
+    steps:
+    - uses: actions/checkout@v4
+    - run: echo nothing to do
