@@ -4,7 +4,7 @@ on:
     branches:
       - production
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}
 
 jobs:
   backport_to_master:
