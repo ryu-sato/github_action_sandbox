@@ -1,7 +1,7 @@
 name: Notify commit status error or failure
 
 on:
-  status
+  check_run
 
 jobs:
   if_error_or_failure:
