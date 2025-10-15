@@ -3,7 +3,8 @@ name: Generate github token
 on:
   pull_request:
     branches:
-      - master
+      # - master
+      - empty-match
 
 jobs:
   dependabot:
