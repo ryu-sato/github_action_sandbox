@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: Checkout application repository
       uses: actions/checkout@v5
+      with:
+        depth: 0
 
     - name: Check if this commit is latest on master branch
       run: git status
