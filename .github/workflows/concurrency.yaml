@@ -21,3 +21,6 @@ jobs:
 
     - name: Check if this commit is latest on master branch
       run: git status
+
+    - name: sleep
+      run: sleep 10
