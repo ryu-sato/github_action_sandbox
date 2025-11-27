@@ -1,0 +1,20 @@
+name: CD
+
+on:
+  pull_request:
+    branches:
+      - stable
+    types:
+      - closed
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout application repository
+      uses: actions/checkout@v6
+    - run: |-
+        ls -al
+        git branch -a
