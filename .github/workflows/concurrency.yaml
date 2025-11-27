@@ -1,0 +1,28 @@
+name: Concurrency test
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout application repository
+      uses: actions/checkout@v5
+      with:
+        depth: 0
+
+    - name: Check if this commit is latest on master branch
+      run: git status
+
+    - name: sleep
+      run: sleep 10

@@ -1,6 +1,9 @@
 name: Environment
 
-on: [push]
+on:
+  push:
+    branches:
+      - empty-match
 
 env:
   ACTION_GLOBAL_ENVIRONMENT_VARIABLE: environment action

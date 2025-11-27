@@ -3,7 +3,8 @@ name: Build docker image
 on: 
   push:
     branches:
-      - master
+      # - master
+      - empty-match
 
 env:
   DOCKERHUB_REPOSITORY: ryu310/github_action_sandbox
