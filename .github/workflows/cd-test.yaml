@@ -3,7 +3,7 @@ name: CD
 on:
   pull_request:
     branches:
-      - stable
+      - production
     types:
       - closed
 
