@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
     - name: Checkout application repository
@@ -18,3 +19,4 @@ jobs:
     - run: |-
         ls -al
         git branch -a
+        echo ${{ vars.TEST_A }}
