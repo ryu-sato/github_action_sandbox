@@ -1,0 +1,16 @@
+name: Github Environment Test
+
+on:
+  pull_request:
+    branches:
+      - stable
+    types: [closed]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.event.pull_request.merged == true
+    steps:
+    - uses: actions/checkout
+    - run: echo ${{ github }}
