@@ -16,7 +16,7 @@ jobs:
       NOTIFY_MESSAGE: '${{ github.repository }} (WF: ${{ github.workflow }}): `${{ github.ref }}`@${{ github.actor }}'
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Success
       run: echo 'success'
