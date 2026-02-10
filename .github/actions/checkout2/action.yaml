@@ -4,6 +4,8 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v6
-      path: checkout2
+      with:
+        path: checkout2
     - shell: bash
       run: cd checkout2 && git log
+
