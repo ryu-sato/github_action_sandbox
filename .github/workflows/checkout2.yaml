@@ -1,4 +1,4 @@
-name: Checkout
+name: Checkout2
 
 on:
   pull_request:
@@ -16,5 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
-    - uses: ./.github/actions/checkout
+    - uses: ./.github/actions/checkout2
+
 
