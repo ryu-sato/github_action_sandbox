@@ -12,5 +12,5 @@ jobs:
     environment: production
     if: github.event.pull_request.merged == true
     steps:
-    - uses: actions/checkout
+    - uses: actions/checkout@v6
     - run: echo ${{ github }}
