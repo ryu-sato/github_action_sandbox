@@ -1,7 +1,7 @@
 name: Checkout
+description: Checkout
 runs:
   using: composite
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v6
-    - run: git log
+    - shell: bash
+      run: git log
