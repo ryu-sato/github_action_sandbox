@@ -18,5 +18,7 @@ jobs:
     - uses: actions/checkout@v6
     - uses: ./.github/actions/checkout2
 
-  checkout3:
-    uses: ./.github/reusable/checkout3.yaml
+# DONT WORK
+#   checkout3:
+#     uses: ./.github/reusable/checkout3.yaml
+
