@@ -1,0 +1,7 @@
+name: Checkout
+description: Checkout
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: git log
