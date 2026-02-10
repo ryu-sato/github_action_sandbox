@@ -1,0 +1,11 @@
+name: Checkout
+
+on: push
+
+jobs:
+  checkout:
+    name: Checkout
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: ./.github/actions/checkout
