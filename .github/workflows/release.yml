@@ -20,7 +20,7 @@ jobs:
           echo ::set-env name=SEMVER::$SEMVER
 
       - name: Set up Docker Buildx
-        uses: crazy-max/ghaction-docker-buildx@v1.0.4
+        uses: crazy-max/ghaction-docker-buildx@v3.3.1
         with:
           version: v0.3.1
 
