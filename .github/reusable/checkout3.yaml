@@ -1,0 +1,13 @@
+name: Reusable Backport Workflow
+on:
+  workflow_call:
+
+jobs:
+  checkout:
+    name: Checkout
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        path: checkout2
+    - run: cd checkout2 && git log
