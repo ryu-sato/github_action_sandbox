@@ -16,7 +16,46 @@ jobs:
     steps:
     - name: Checkout application repository
       uses: actions/checkout@v6
-    - run: |-
+
+    - name: Verify checked-out commit
+      run: |-
+        echo "::group::event / github context"
+        echo "event_name          = ${{ github.event_name }}"
+        echo "action              = ${{ github.event.action }}"
+        echo "github.ref          = ${{ github.ref }}"
+        echo "github.sha          = ${{ github.sha }}"
+        echo "pr.number           = ${{ github.event.pull_request.number }}"
+        echo "pr.title            = ${{ github.event.pull_request.title }}"
+        echo "pr.merged           = ${{ github.event.pull_request.merged }}"
+        echo "pr.base.ref         = ${{ github.event.pull_request.base.ref }}"
+        echo "pr.base.sha         = ${{ github.event.pull_request.base.sha }}"
+        echo "pr.head.ref         = ${{ github.event.pull_request.head.ref }}"
+        echo "pr.head.sha         = ${{ github.event.pull_request.head.sha }}"
+        echo "pr.merge_commit_sha = ${{ github.event.pull_request.merge_commit_sha }}"
+        echo "::endgroup::"
+
+        echo "::group::checked-out working tree"
+        HEAD_SHA="$(git rev-parse HEAD)"
+        echo "git rev-parse HEAD   = ${HEAD_SHA}"
+        git log -1 --pretty='format:%H %d %s' || true
+        echo ""
+        echo "::endgroup::"
+
+        echo "::group::production tip (for comparison)"
+        git fetch --depth=1 origin production >/dev/null 2>&1 || true
+        PROD_TIP="$(git rev-parse FETCH_HEAD 2>/dev/null || echo 'n/a')"
+        echo "origin/production tip = ${PROD_TIP}"
+        echo "::endgroup::"
+
+        echo "::group::comparison"
+        echo "HEAD == github.sha          : $([ "${HEAD_SHA}" = "${{ github.sha }}" ] && echo YES || echo NO)"
+        echo "HEAD == pr.head.sha         : $([ "${HEAD_SHA}" = "${{ github.event.pull_request.head.sha }}" ] && echo YES || echo NO)"
+        echo "HEAD == pr.merge_commit_sha : $([ "${HEAD_SHA}" = "${{ github.event.pull_request.merge_commit_sha }}" ] && echo YES || echo NO)"
+        echo "HEAD == production tip      : $([ "${HEAD_SHA}" = "${PROD_TIP}" ] && echo YES || echo NO)"
+        echo "::endgroup::"
+
+    - name: Original step (kept)
+      run: |-
         ls -al
         git branch -a
         echo ${{ vars.TEST_A }}
