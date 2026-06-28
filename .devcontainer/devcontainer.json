@@ -27,5 +27,7 @@
 
 	"runArgs": [
 		"--env-file", "${localWorkspaceFolder}/.devcontainer/devcontainer.private.env"
-	]
+	],
+
+	"postStartCommand": "postStartCommand.sh"
 }
