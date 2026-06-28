@@ -8,4 +8,5 @@ runs:
         path: checkout2
     - shell: bash
       run: cd checkout2 && git log
-
+    - shell: bash
+      run: echo checkout2

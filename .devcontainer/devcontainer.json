@@ -1,0 +1,41 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Debian",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:trixie",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"github.vscode-github-actions",
+				"anthropic.claude-code"
+			]
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+	"runArgs": [
+		"--env-file", "${localWorkspaceFolder}/.devcontainer/devcontainer.private.env",
+		// Claude Code の sandbox (bubblewrap) が unprivileged user namespace を
+		// 作成できるよう、Docker のデフォルト seccomp プロファイルを解除する
+		"--security-opt", "seccomp=unconfined"
+	],
+
+	// Claude Code の sandbox 機能に必要なパッケージをインストールする
+	// (bubblewrap: FS/プロセス分離, socat: ネットワークプロキシ)
+	"postCreateCommand": ".devcontainer/postCreateCommand.sh",
+
+	"postStartCommand": ".devcontainer/postStartCommand.sh"
+}
