@@ -17,7 +17,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"anthropic.claude-code"
 			]
 		}
 	},
@@ -26,8 +27,15 @@
 	// "remoteUser": "root"
 
 	"runArgs": [
-		"--env-file", "${localWorkspaceFolder}/.devcontainer/devcontainer.private.env"
+		"--env-file", "${localWorkspaceFolder}/.devcontainer/devcontainer.private.env",
+		// Claude Code の sandbox (bubblewrap) が unprivileged user namespace を
+		// 作成できるよう、Docker のデフォルト seccomp プロファイルを解除する
+		"--security-opt", "seccomp=unconfined"
 	],
+
+	// Claude Code の sandbox 機能に必要なパッケージをインストールする
+	// (bubblewrap: FS/プロセス分離, socat: ネットワークプロキシ)
+	"postCreateCommand": ".devcontainer/postCreateCommand.sh",
 
 	"postStartCommand": ".devcontainer/postStartCommand.sh"
 }
