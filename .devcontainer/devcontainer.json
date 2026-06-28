@@ -29,5 +29,5 @@
 		"--env-file", "${localWorkspaceFolder}/.devcontainer/devcontainer.private.env"
 	],
 
-	"postStartCommand": "postStartCommand.sh"
+	"postStartCommand": ".devcontainer/postStartCommand.sh"
 }
